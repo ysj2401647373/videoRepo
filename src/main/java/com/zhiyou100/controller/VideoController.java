@@ -82,7 +82,7 @@ public class VideoController {
   @ResponseBody
    public String deleteVideo(Integer id){
 	  vs.deleteVideo(id);
-/*	return "redirect:/video/videoList.action"; */
+
 	 return "success"; 
 	  
    }

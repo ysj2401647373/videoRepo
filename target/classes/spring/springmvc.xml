@@ -29,4 +29,23 @@
      <bean class="com.zhiyou100.interceptor"></bean>
  </mvc:interceptor>
 </mvc:interceptors> -->
+
+<mvc:interceptors>
+<mvc:interceptor>
+<mvc:mapping path="/**"/>
+
+<mvc:exclude-mapping path="/video/**"/>
+<mvc:exclude-mapping path="/front/**"/>
+<mvc:exclude-mapping path="/speaker/**"/>
+<mvc:exclude-mapping path="/course/**"/>
+
+<bean class="com.zhiyou100.util.CustomInterceptor"></bean>
+</mvc:interceptor>
+
+
+</mvc:interceptors>
+
+
+
+
 		</beans> 

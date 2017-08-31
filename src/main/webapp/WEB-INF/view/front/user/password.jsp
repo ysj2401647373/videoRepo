@@ -71,19 +71,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						if(data=="fail"){
 							
                              $("#pid").text("密码不正确");
-                         
-                     alert("111");
+                     
 						}else{
 							   $("#pid").text("");
+							
+				
 						}
 					},'text');
-				
-	
+
 	 })
-	 
-	 
-	 
+
 	 $('#changeId').validate({
+		
+	 
 			rules:{
 				
 				newPassword:{

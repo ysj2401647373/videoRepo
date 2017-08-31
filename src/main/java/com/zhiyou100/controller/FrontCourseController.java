@@ -16,6 +16,7 @@ import com.zhiyou100.service.SpeakService;
 import com.zhiyou100.service.VideoService;
 import com.zhiyou100.service.courseService;
 import com.zhiyou100.service.subjectService;
+import com.zhiyou100.util.VideoTime;
 @Controller
 public class FrontCourseController {
    @Autowired
@@ -36,13 +37,20 @@ public class FrontCourseController {
 		
 		List<Course> list=fcs.findCourseBySubject(subjectId);
 	    for(Course course:list){
-	    	course.setVideoList(vs.findVideoList(course.getId()));               
+	    	List<Video> li = vs.findVideoList(course.getId());
+	    	     String str=null;
+	    	    for(Video video:li){
+	    	    	
+	    	    	str=VideoTime.ConverTime(video.getVideoLength());
+	    	        video.setVideoLengthStr(str);
+
+	    	    }
+	    	course.setVideoList(li); 
 	    }
 	    md.addAttribute("subject",s);
 		md.addAttribute("subjectId", subjectId);
 		md.addAttribute("courses", list);
-		return "/front/course/index";
-		
+		return "/front/course/index";	
 	}
 	
 	@RequestMapping("front/video/index.action")
@@ -62,7 +70,14 @@ public class FrontCourseController {
 	
 		Course course=cs.findCourseById(vi.getCourseId());
 		List<Video> list=vs.findAllVideo();
-
+	
+		String str=null;
+          for(Video video:list){
+         
+        	str=VideoTime.ConverTime(video.getVideoLength());
+        	  video.setVideoLengthStr(str); 
+          }
+         /* List<Video> list1 =vs.findAllVideo();*/
 		md.addAttribute("video", vi);
 		md.addAttribute("speaker", speaker);
 		md.addAttribute("course", course);
