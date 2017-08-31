@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.zhiyou100.mapper.CourseMapper;
 import com.zhiyou100.model.Course;
-import com.zhiyou100.model.Subject;
+import com.zhiyou100.model.Page;
+import com.zhiyou100.model.Query;
 import com.zhiyou100.service.courseService;
 @Service
 public class courseServiceImpl implements courseService {
@@ -44,6 +45,25 @@ public class courseServiceImpl implements courseService {
 	public void updateCourse(Course course) {
 		// TODO Auto-generated method stub
 		cm.updateByPrimaryKeySelective(course);
+	}
+
+	@Override
+	public Page<Course> findAllCourse(Integer currentPage) {
+		// TODO Auto-generated method stub
+		Page<Course> page=new Page<>();
+		page.setPage(currentPage);
+		page.setSize(5);
+		page.setTotal(cm.countCourse());
+		Query qv=new Query();
+		qv.setCurrentPage((currentPage-1)*5);
+		page.setRows(cm.findAllCoursePage(qv));
+		
+		
+		
+		
+		
+		
+		return page;
 	}
 
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ysj" uri="http://zhiyou100.com/common/"%>
 <!DOCTYPE html>
 
 <html>
@@ -60,7 +61,7 @@
 						<th width="4%">编辑</th>
 						<th width="4%">删除</th>
 					</tr>
-					<c:forEach var="speaker"  items="${speaker}" varStatus="status">
+					<c:forEach var="speaker"  items="${page.rows}" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
 						<td>${speaker.speakerName}</td>
@@ -79,22 +80,7 @@
 			</div>
 
 			<div class="navbar-form navbar-right">
-				<nav aria-label="...">
-					<ul class="pagination">
-						<li class="disabled">
-							<a href="#" aria-label="Previous"><span aria-hidden="true">上一页</span></a>
-						</li>
-						<li class="active">
-							<a href="#">1 <span class="sr-only">(current)</span></a>
-						</li>
-						<li>
-							<a href="#">2</a>
-						</li>
-						<li class="disabled">
-							<a href="#" aria-label="Previous"><span aria-hidden="true">下一页</span></a>
-						</li>
-					</ul>
-				</nav>
+				<ysj:page url="${pageContext.request.contextPath}/speaker/speakerList.action"></ysj:page>
 			</div>
 
 		</div>

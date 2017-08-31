@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zhiyou100.model.Course;
+import com.zhiyou100.model.Page;
 import com.zhiyou100.model.Subject;
 import com.zhiyou100.service.courseService;
 import com.zhiyou100.service.subjectService;
@@ -20,13 +22,18 @@ public class courseController {
    @Autowired
    subjectService ss;
 	@RequestMapping("/course/courseList.action")
-   public ModelAndView courseList(){
-		
-	List<Course> list=cs.findAllCourse();
+   public ModelAndView courseList(@RequestParam(defaultValue="1")Integer page){
+
+	/*List<Course> list=cs.findAllCourse();
 	ModelAndView mv=new ModelAndView();
 	mv.addObject("course",list);
-	mv.setViewName("/course/courseList");	
-	return mv;	
+	mv.setViewName("/course/courseList");*/
+		Page<Course> page1=cs.findAllCourse(page);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("page",page1);
+		mv.setViewName("/course/courseList");
+
+	    return mv;	
 	}
 	@RequestMapping(value="/course/addCourse.action",method=RequestMethod.GET)
 	public ModelAndView addCourse(){

@@ -62,8 +62,7 @@ public class FrontCourseController {
 	
 		Course course=cs.findCourseById(vi.getCourseId());
 		List<Video> list=vs.findAllVideo();
-		
-		
+
 		md.addAttribute("video", vi);
 		md.addAttribute("speaker", speaker);
 		md.addAttribute("course", course);

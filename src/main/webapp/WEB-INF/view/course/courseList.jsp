@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="bobo" uri="http://zhiyou100.com/common/"%>
 <!DOCTYPE html>
 
 <html>
@@ -44,7 +45,7 @@
 						<th width="4%">编辑</th>
 						<th width="4%">删除</th>
 					</tr>
-					<c:forEach var="course"  items="${course}" varStatus="status">
+					<c:forEach var="course"  items="${page.rows}" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
 						<td>${course.courseName}</td>
@@ -62,7 +63,7 @@
 			</div>
 
 			<div class="navbar-form navbar-right">
-				<nav aria-label="...">
+				<!-- <nav aria-label="...">
 					<ul class="pagination">
 						<li class="disabled">
 							<a href="#" aria-label="Previous"><span aria-hidden="true">上一页</span></a>
@@ -77,7 +78,12 @@
 							<a href="#" aria-label="Previous"><span aria-hidden="true">下一页</span></a>
 						</li>
 					</ul>
-				</nav>
+				</nav> -->
+				
+				<bobo:page
+					url="${pageContext.request.contextPath }/course/courseList.action"></bobo:page>
+				
+				
 			</div>
 
 		</div>

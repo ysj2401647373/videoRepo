@@ -8,10 +8,17 @@ private String courseName;
 private Course course;
 private int currentPage;
 private String headUrl;
+private String speakerJob;
 private User u;
 
 
 
+public String getSpeakerJob() {
+	return speakerJob;
+}
+public void setSpeakerJob(String speakerJob) {
+	this.speakerJob = speakerJob;
+}
 public User getU() {
 	return u;
 }
@@ -64,8 +71,10 @@ public void setCourseName(String courseName) {
 @Override
 public String toString() {
 	return "Query [speaker=" + speaker + ", vi=" + vi + ", speakerName=" + speakerName + ", courseName=" + courseName
-			+ ", course=" + course + ", currentPage=" + currentPage + ", headUrl=" + headUrl + ", u=" + u + "]";
+			+ ", course=" + course + ", currentPage=" + currentPage + ", headUrl=" + headUrl + ", speakerJob="
+			+ speakerJob + ", u=" + u + "]";
 }
+
 
 
 

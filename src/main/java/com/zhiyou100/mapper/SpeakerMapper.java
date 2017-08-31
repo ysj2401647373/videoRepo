@@ -1,5 +1,6 @@
 package com.zhiyou100.mapper;
 
+import com.zhiyou100.model.Query;
 import com.zhiyou100.model.Speaker;
 import com.zhiyou100.model.SpeakerExample;
 import java.util.List;
@@ -31,5 +32,9 @@ public interface SpeakerMapper {
    /* List<Speaker> findAllSpeakerByName(String speakerName, String speakerJob);*/
 
 	List<Speaker> findAllSpeakerByName(Speaker s);
+
+	int findSpeakerByNJ(Speaker sp);
+
+	List<Speaker> findAllSpeakerByPage(Query qv);
     
 }

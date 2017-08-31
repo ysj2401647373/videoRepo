@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.zhiyou100.model.Page;
 import com.zhiyou100.model.Speaker;
 import com.zhiyou100.service.SpeakService;
 
@@ -25,7 +25,7 @@ public class SpeakerController {
 		return "/speaker/speakerList";	
     }   
     */
-    @RequestMapping(value="/speaker/speakerList.action")
+   /* @RequestMapping(value="/speaker/speakerList.action")
     public ModelAndView speakerList(@RequestParam(defaultValue="",required=true)String speakerName,
     		@RequestParam(defaultValue="")String speakerJob,
     		HttpServletRequest req){
@@ -41,6 +41,21 @@ public class SpeakerController {
     	mv.addObject("speaker", speaker);
     	mv.setViewName("/speaker/speakerList");
 		return mv;	
+    }*/
+    @RequestMapping(value="/speaker/speakerList.action")
+    public ModelAndView speakerList(@RequestParam(defaultValue="",required=true)String speakerName,
+    		@RequestParam(defaultValue="")String speakerJob,
+    		@RequestParam(defaultValue="1")Integer page
+    		){
+    	
+    	Page<Speaker> page1=ss.findAllSpeakerPage(speakerName,speakerJob,page);
+    	
+    	ModelAndView mv=new ModelAndView();
+    	mv.addObject("page",page1);
+    	mv.addObject("speakerName",speakerName);
+    	mv.addObject("speakerJob",speakerJob);
+    	mv.setViewName("/speaker/speakerList");
+    	return mv;	
     }
     @RequestMapping(value="/speaker/updateSpeaker.action",method=RequestMethod.GET)
     public ModelAndView updateSpeaker(Integer id){

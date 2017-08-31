@@ -268,8 +268,31 @@
   and speaker_job like '%' #{speakerJob} '%'
   </if>
   </where>
+
+  </select>
   
-  
+  <select id="findSpeakerByNJ" parameterType="Speaker" resultType="Integer">
+   select count(*) from speaker
+  <where>
+  <if test="speakerName!=null and speakerName!=''">
+  and speaker_name like '%' #{speakerName} '%'
+  </if>
+  <if test="speakerJob!=null and speakerJob!=''">
+  and speaker_job like '%' #{speakerJob} '%'
+  </if>
+  </where>
+  </select>
+  <select id="findAllSpeakerByPage" resultMap="BaseResultMap" parameterType="query">
+   select * from speaker
+   <where>
+  <if test="speakerName!=null and speakerName!=''">
+  and speaker_name like '%' #{speakerName} '%'
+  </if>
+  <if test="speakerJob!=null and speakerJob!=''">
+  and speaker_job like '%' #{speakerJob} '%'
+  </if>
+  </where>
+  limit #{currentPage},5
   </select>
   
 </mapper>

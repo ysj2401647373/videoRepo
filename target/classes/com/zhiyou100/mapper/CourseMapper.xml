@@ -225,9 +225,17 @@
       subject_id = #{subjectId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+ 
+ 
+ 
     
  <select id="findAllCourse" resultMap="BaseResultMap">
  select c.*,s.subject_name sName from course c,subject s where c.subject_id=s.id
  </select> 
-  
+ <select id="countCourse" resultType="Integer">
+ select count(*) from course
+ </select>
+  <select id="findAllCoursePage" parameterType="query" resultMap="BaseResultMap">
+  select c.*,s.subject_name sName from course c,subject s where c.subject_id=s.id limit #{currentPage},5
+  </select>
 </mapper>

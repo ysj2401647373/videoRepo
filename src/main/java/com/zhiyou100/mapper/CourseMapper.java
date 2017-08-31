@@ -2,6 +2,7 @@ package com.zhiyou100.mapper;
 
 import com.zhiyou100.model.Course;
 import com.zhiyou100.model.CourseExample;
+import com.zhiyou100.model.Query;
 import com.zhiyou100.model.Subject;
 
 import java.util.List;
@@ -31,4 +32,8 @@ public interface CourseMapper {
     int updateByPrimaryKey(Course record);
 
 	List<Course> findAllCourse();
+
+	int countCourse();
+
+	List<Course> findAllCoursePage(Query qv);
 }
