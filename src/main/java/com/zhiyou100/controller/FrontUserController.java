@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
 import com.zhiyou100.model.User;
 import com.zhiyou100.service.UserService;
 import com.zhiyou100.util.MD5Utils;
@@ -39,7 +37,7 @@ public class FrontUserController {
 	@RequestMapping(value = "/front/user/regist.action", method = RequestMethod.POST)
 	@ResponseBody
 	public String regist(User user, Model md) {
-	
+
 		us.regist(user);
 		md.addAttribute("user", user);
 		return "success";
@@ -49,7 +47,7 @@ public class FrontUserController {
 	@RequestMapping(value = "front/user/login.action", method = RequestMethod.POST)
 	@ResponseBody
 	public String frontLogin(User u, HttpSession session) {
-		
+
 		List<User> list = us.findUser(u);
 		if (list.isEmpty()) {
 			return "false";
@@ -78,7 +76,7 @@ public class FrontUserController {
 	}
 
 	@RequestMapping(value = "/front/user/profile.action", method = RequestMethod.POST)
-	public String updatePropile(User u,Model md) {
+	public String updatePropile(User u, Model md) {
 
 		us.updatePropile(u);
 		User user = us.findUserById(u.getId());
@@ -98,7 +96,8 @@ public class FrontUserController {
 	}
 
 	@RequestMapping(value = "/front/user/avatar.action", method = RequestMethod.POST)
-	public String updateAvatar(User user, MultipartFile image_file,HttpSession session) throws IllegalStateException, IOException {
+	public String updateAvatar(User user, MultipartFile image_file, HttpSession session)
+			throws IllegalStateException, IOException {
 		String str = UUID.randomUUID().toString().replaceAll("-", "");
 		String ext = FilenameUtils.getExtension(image_file.getOriginalFilename());
 		String fileName = str + "." + ext;
@@ -109,8 +108,10 @@ public class FrontUserController {
 		image_file.transferTo(new File(path + "\\" + fileName));
 		// 把数据写到数据库中
 		us.updateRoleById(user);
-		/*User u =us.findUserById(user.getId());
-		session.setAttribute("user", u);*/
+		/*
+		 * User u =us.findUserById(user.getId()); session.setAttribute("user",
+		 * u);
+		 */
 		return "/front/user/avatar";
 
 	}
@@ -132,7 +133,7 @@ public class FrontUserController {
 
 		if (list.isEmpty()) {
 			md.addAttribute("error", "密码不正确");
-			
+
 			return "fail";
 		} else {
 			System.out.println("密码正确");
@@ -161,14 +162,19 @@ public class FrontUserController {
 	@RequestMapping(value = "front/user/ajaxforgetpwd.action", method = RequestMethod.POST)
 	@ResponseBody
 	public String forgetPassweord(String email) throws Exception {
-		
-	Random ran = new Random();
-		int num = ran.nextInt(10000 - 1000 + 1) + 1000;
+
+		/*
+		 * Random ran = new Random(); int num = ran.nextInt(10000 - 1000 + 1) +
+		 * 1000; User user = us.findUserByEmail(email); user.setCaptcha("" +
+		 * num); us.updateUserByUser(user); MailUtil.send("2401647373@qq.com",
+		 * "验证码", "" + num);
+		 */
+
+		int num = us.IntegerCode(8);
 		User user = us.findUserByEmail(email);
 		user.setCaptcha("" + num);
 		us.updateUserByUser(user);
 		MailUtil.send("2401647373@qq.com", "验证码", "" + num);
-
 		return "success";
 
 	}
@@ -189,16 +195,15 @@ public class FrontUserController {
 		User u = us.findUserByCaptcha(email, captcha);
 		u.setPassword(password);
 		us.updateUserByUser(u);
-
 		return "/front/user/forget_pwd";
 
 	}
 
 	@RequestMapping("/front/loginOut.action")
-	public String loginOut(HttpSession session){
+	public String loginOut(HttpSession session) {
 		session.invalidate();
 		return "redirect:/front/login.action";
 
 	}
-	
+
 }

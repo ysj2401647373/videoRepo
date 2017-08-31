@@ -1,6 +1,7 @@
 package com.zhiyou100.service.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,6 +105,29 @@ public class UserServiceImpl implements UserService {
 			 }
 			return u;
 
+	}
+
+	@Override
+	public int IntegerCode(Integer length) {
+		// TODO Auto-generated method stub
+		Random ran = new Random();
+		int num=0;
+	     if(length==4){
+	    	num=ran.nextInt(10000-1000+1)+1000;
+ 
+	     }else if(length==5){
+	    	 num=ran.nextInt(100000-10000+1)+10000;
+	    	 
+	     }else if(length==6){
+	    	 num=ran.nextInt(1000000-100000+1)+100000;
+	    	 
+	     }else if(length==7){
+	    	 num=ran.nextInt(10000000-1000000+1)+1000000; 
+	     }else if(length==8){
+	    	 num=ran.nextInt(100000000-10000000+1)+10000000; 
+	     }
+
+		return num;
 	}
 	
 	

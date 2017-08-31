@@ -26,6 +26,8 @@ public interface UserService {
 
 	User findUserByCaptcha(String email, String captcha);
 
+	int IntegerCode(Integer length);
+
 	
 
 }
